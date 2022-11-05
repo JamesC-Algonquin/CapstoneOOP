@@ -31,8 +31,6 @@ public class LoginServlet extends HttpServlet{
 		RequestDispatcher dispatch = null;
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		System.out.println(email);
-		System.out.println(password);
 		
 		int loginStatus = 0;
 		try {
@@ -45,9 +43,13 @@ public class LoginServlet extends HttpServlet{
 		
 		if (loginStatus == 1) {
 			System.out.println("Login Success!");
+			dispatch = req.getRequestDispatcher("/ProfessorServlet");
+			dispatch.forward(req, resp);
 		}
 		else if (loginStatus == 2) {
 			System.out.println("Login Success!");
+			dispatch = req.getRequestDispatcher("/StudentServlet");
+			dispatch.forward(req, resp);
 		}
 		else {
 			System.out.println("Login Failed");

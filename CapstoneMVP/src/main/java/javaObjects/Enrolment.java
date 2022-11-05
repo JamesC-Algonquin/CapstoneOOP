@@ -1,9 +1,29 @@
 package javaObjects;
 
-import java.util.UUID;
-
 public class Enrolment {
 	
-	private UUID id;
+	private int id;
+	private Student student;
+	
+	public Enrolment(int i, Student s) {
+		id = i;
+		student = s;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 }
