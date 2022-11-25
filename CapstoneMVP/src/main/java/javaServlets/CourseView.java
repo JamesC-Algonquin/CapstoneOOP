@@ -2,12 +2,15 @@ package javaServlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserViewServlet extends HttpServlet{
+@WebServlet("/CourseView")
+public class CourseView extends HttpServlet {
 
 	/**
 	 * 
@@ -16,10 +19,12 @@ public class UserViewServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		//if user code is for prof, load professorview.jsp
-		//Else if student, load StudentView.jsp
-		//Else, no code, load login.jsp
+		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/CourseView.jsp");
+		dispatch.forward(req, resp);
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 	}
 
