@@ -12,6 +12,12 @@
 <link rel="stylesheet" type="text/css" href="CSS/View.css" />
 </head>
 <body>
+<ul>
+		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet">Home</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/CourseView" class="active">Courses</a></li>
+	</ul>
+	<br>
+	<br>
 		<form action="/CapstoneMVP/AssignmentView" method="POST">
 			<label for="name">Assignment Name</label><br>
 			<input type="text" id="name" name="name" /><br>

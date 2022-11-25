@@ -10,11 +10,12 @@
 </head>
 <body>
 	<ul>
-		<li class="nav"><a href="/CapstoneMVP/ProfessorServlet" class="active">Home</a></li>
-		<li class="nav"><a href="/CapstoneMVP/CourseView">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet" class="active">Home</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/CourseView">Courses</a></li>
 	</ul>
 	<br>
-	<% Professor prof = Professor.getUser();%>
+	<%   
+		Professor prof = (Professor) session.getAttribute("user");%>
 	<h3>Welcome <%=prof.getName()%> </h3>
 
 </body>

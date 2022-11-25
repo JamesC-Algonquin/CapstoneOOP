@@ -36,7 +36,6 @@ public class ApplicationDAO {
 		}
 		if(prof)
 		{
-			Professor.setUser(ApplicationDAO.getProfessor(email));
 			return profValid;
 		}
 		
@@ -55,7 +54,6 @@ public class ApplicationDAO {
 		}
 		if(student)
 		{
-			Student.setUser(ApplicationDAO.getStudent(email));
 			return studentValid;
 		}
 		
@@ -75,9 +73,7 @@ public class ApplicationDAO {
 			result.next();
 			prof = new Professor(result.getInt("id"), result.getString("name"), result.getString("email"));
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		return prof;
@@ -96,11 +92,9 @@ public class ApplicationDAO {
 			result.next();
 			student = new Student(result.getInt("id"), result.getString("name"), result.getString("email"));
 		}
-		catch(SQLException e) {
+		catch(Exception e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		return student;
 	}
 	
@@ -121,11 +115,9 @@ public class ApplicationDAO {
 				courses.add(course);
 			}			
 		}
-		catch(SQLException e) {
+		catch(Exception e) {
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		} 
 		
 		return courses;
 	}
@@ -150,9 +142,7 @@ public class ApplicationDAO {
 				
 			}			
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		
@@ -176,9 +166,7 @@ public class ApplicationDAO {
 				grades.add(grade);
 			}			
 		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		catch(Exception e) {
 			e.printStackTrace();
 		}
 		

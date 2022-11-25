@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javaDAO.ApplicationDAO;
 
 
-@WebServlet("/AssignmentView")
+@WebServlet("/user/AssignmentView")
 public class AssignmentView extends HttpServlet {
 
 	/**

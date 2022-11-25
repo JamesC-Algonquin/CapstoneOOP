@@ -13,16 +13,18 @@
 </head>
 <body>	
 	<ul>
-		<li class="nav"><a href="/CapstoneMVP/ProfessorServlet">Home</a></li>
-		<li class="nav"><a href="/CapstoneMVP/CourseView" class="active">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet">Home</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/CourseView" class="active">Courses</a></li>
 	</ul>
 	<br>
 	<br>
 	<ul>
-		<% ArrayList<Course> courses = ApplicationDAO.getCourses(Professor.getUser().getId()); 
+		<% 	Professor prof = (Professor) session.getAttribute("user");
+			
+			ArrayList<Course> courses = ApplicationDAO.getCourses(prof.getId()); 
 			for(Course course: courses ){
 		%>
-			<li> <a href="/CapstoneMVP/EnrolmentView?course=<%=course.getId()%>"><%=course.getCourseName()%></a> </li>
+			<li> <a href="/CapstoneMVP/user/EnrolmentView?course=<%=course.getId()%>"><%=course.getCourseName()%></a> </li>
 		
 		<% } %>
 	</ul>

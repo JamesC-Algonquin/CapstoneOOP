@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/ProfessorServlet")
+@WebServlet("/user/ProfessorServlet")
 public class ProfessorView extends HttpServlet {
 	
 	/**
