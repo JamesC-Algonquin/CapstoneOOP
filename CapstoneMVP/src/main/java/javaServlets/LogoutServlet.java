@@ -24,5 +24,13 @@ public class LogoutServlet extends HttpServlet {
 		dispatch.forward(req, resp);
 		
 	}
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		session.invalidate();
+		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/Login.jsp");
+		dispatch.forward(req, resp);
+		
+	}
 
 }

@@ -5,7 +5,7 @@
     <head>
         <meta charset="ISO-8859-1" />
         <title>Login</title>
-        <link rel="stylesheet" type="text/css" href="CSS/style.css" />
+        <link rel="stylesheet" type="text/css" href="/CapstoneMVP/CSS/style.css" />
     </head>
     <body>
         <div class="container">
@@ -16,5 +16,7 @@
                 <input type="submit" value="Log In" class="btn" />
             </form>
         </div>
+        <br>
+        Don't have an Account? <a href="/CapstoneMVP/Register">Register Here</a>
     </body>
 </html>

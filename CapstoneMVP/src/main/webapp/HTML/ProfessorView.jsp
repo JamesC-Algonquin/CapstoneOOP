@@ -6,16 +6,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Home</title>
-<link rel="stylesheet" type="text/css" href="CSS/View.css" />
+<link rel="stylesheet" type="text/css" href="/CapstoneMVP/CSS/View.css" />
 </head>
 <body>
 	<ul>
 		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet" class="active">Home</a></li>
 		<li class="nav"><a href="/CapstoneMVP/user/CourseView">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/LogoutServlet">Logout</a></li>
 	</ul>
 	<br>
-	<%   
-		Professor prof = (Professor) session.getAttribute("user");%>
+	<% Professor prof = (Professor) session.getAttribute("user");%>
 	<h3>Welcome <%=prof.getName()%> </h3>
 
 </body>

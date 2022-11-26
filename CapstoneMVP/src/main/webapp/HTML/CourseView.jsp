@@ -9,12 +9,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Courses</title>
-<link rel="stylesheet" type="text/css" href="CSS/View.css" />
+<link rel="stylesheet" type="text/css" href="/CapstoneMVP/CSS/View.css" />
 </head>
 <body>	
 	<ul>
 		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet">Home</a></li>
 		<li class="nav"><a href="/CapstoneMVP/user/CourseView" class="active">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/LogoutServlet">Logout</a></li>
 	</ul>
 	<br>
 	<br>

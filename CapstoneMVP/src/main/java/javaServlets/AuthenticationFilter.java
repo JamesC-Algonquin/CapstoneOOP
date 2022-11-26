@@ -18,15 +18,13 @@ public class AuthenticationFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
+		
 		HttpServletRequest req = (HttpServletRequest)arg0;
-		
-		//testing
-		System.out.println("filtered");
-		
 		HttpSession session = req.getSession();
+		
 		if (session.getAttribute("user") == null) {
 			//Load Login Page
-			RequestDispatcher dispatch = req.getRequestDispatcher("/LoginServlet");
+			RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/Login.jsp");
 			dispatch.forward(req, arg1);
 		}
 		arg2.doFilter(req, arg1);
