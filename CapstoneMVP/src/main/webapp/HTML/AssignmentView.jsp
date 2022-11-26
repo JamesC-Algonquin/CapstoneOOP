@@ -23,7 +23,7 @@
 			<label for="name">Assignment Name</label><br>
 			<input type="text" id="name" name="name" required/><br>
 			<label for="percent">Grade (Percent)</label><br>
-			<input type="number" id="percent" name="percent" min="0" max="100" required/><br>
+			<input type="number" id="percent" name="percent" min="0" max="100" step="any" required/><br>
 			<input type="submit" value="Submit" />
 			<input type="hidden" value="<%=request.getParameter("enrol")%>" name="enrol" id="enrol" />		
 		</form>

@@ -18,11 +18,16 @@ public class ApplicationDAO {
 	private static final int studentValid = 2;
 	
 	public static int authenticateLogin(String email, String password) throws ClassNotFoundException, SQLException {
+		//Connection Objects
 		DBConnection dbConn = DBConnection.getDBConnection();
 		Connection connect = null;
+		//Query Objects
 		String sqlPROF = "SELECT COUNT(*) AS COUNT FROM PROFESSOR WHERE EMAIL LIKE ? and PASSWORD LIKE ?;";
 		ResultSet result = null;
+		//Because email is not case sensitive
 		email = email.toLowerCase();
+		
+		//Check Prof table first
 		boolean prof = false;		
 		try {
 			connect = dbConn.getConnectionToDatabase();
@@ -35,11 +40,13 @@ public class ApplicationDAO {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//If returns 1, prof logs in
 		if(prof)
 		{
 			return profValid;
 		}
 		
+		//If not, try Student Table
 		String sqlStudent = "SELECT COUNT(*) AS COUNT FROM STUDENT WHERE EMAIL LIKE ? and PASSWORD LIKE ?;";
 		result = null;
 		boolean student = false;	
@@ -57,7 +64,7 @@ public class ApplicationDAO {
 		{
 			return studentValid;
 		}
-		
+		//else, reject login
 		return 0;		
 	}
 
@@ -189,7 +196,7 @@ public class ApplicationDAO {
 		
 		return enrolments;
 	}
-	
+
 	public static ArrayList<Grade> getGrades(int id){
 		ArrayList<Grade> grades = new ArrayList<>();
 		DBConnection dbConn = DBConnection.getDBConnection();
@@ -237,6 +244,7 @@ public class ApplicationDAO {
 			String sql = "INSERT INTO PROFESSOR (NAME, EMAIL, PASSWORD) VALUES (?, ?, ?);";
 			DBConnection dbConn = DBConnection.getDBConnection();
 			Connection conn = null;
+			email = email.toLowerCase();
 			try {
 				conn = dbConn.getConnectionToDatabase();
 				PreparedStatement stmt = conn.prepareStatement(sql);
