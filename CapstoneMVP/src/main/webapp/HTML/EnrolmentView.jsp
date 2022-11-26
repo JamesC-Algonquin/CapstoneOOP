@@ -9,12 +9,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Enrolments</title>
-<link rel="stylesheet" type="text/css" href="CSS/View.css" />
+<link rel="stylesheet" type="text/css" href="/CapstoneMVP/CSS/View.css" />
 </head>
 <body>
 	<ul>
-		<li class="nav"><a href="/CapstoneMVP/ProfessorServlet">Home</a></li>
-		<li class="nav"><a href="/CapstoneMVP/CourseView" class="active">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/ProfessorServlet">Home</a></li>
+		<li class="nav"><a href="/CapstoneMVP/user/CourseView" class="active">Courses</a></li>
+		<li class="nav"><a href="/CapstoneMVP/LogoutServlet">Logout</a></li>
 	</ul>
 	<br>
 	<br>
@@ -22,7 +23,7 @@
 		<% ArrayList<Enrolment> enrolments = ApplicationDAO.getEnrolment(Integer.valueOf(request.getParameter("course")));
 			for(Enrolment enrol: enrolments ){
 		%>
-			<li> <a href="/CapstoneMVP/AssignmentView?enrol=<%=enrol.getId()%>"><%=enrol.getStudent().getName()%></a> </li>
+			<li> <a href="/CapstoneMVP/user/AssignmentView?enrol=<%=enrol.getId()%>"><%=enrol.getStudent().getName()%></a> </li>
 		
 		<% } %>
 	</ul>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/EnrolmentView")
+@WebServlet("/user/EnrolmentView")
 public class EnrolmentView extends HttpServlet{
 
 	/**

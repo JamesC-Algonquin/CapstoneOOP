@@ -19,26 +19,19 @@
 	</ul>
 	<br>
 	<br>
-		<form action="/CapstoneMVP/user/AssignmentView" method="POST">
+		<%	int id = Integer.valueOf(request.getParameter("id"));
+			Grade grade = ApplicationDAO.getGrade(id); %>
+			
+			
+		<form action="/CapstoneMVP/user/AssignmentEdit" method="POST">
 			<label for="name">Assignment Name</label><br>
-			<input type="text" id="name" name="name" required/><br>
+			<input type="text" id="name" name="name" value=<%= grade.getAssignmentName() %> required/><br>
 			<label for="percent">Grade (Percent)</label><br>
-			<input type="number" id="percent" name="percent" min="0" max="100" step="any" required/><br>
+			<input type="number" id="percent" name="percent" min="0" max="100" step="any" value=<%=grade.getGradePercentage()%> required/><br>
 			<input type="submit" value="Submit" />
-			<input type="hidden" value="<%=request.getParameter("enrol")%>" name="enrol" id="enrol" />		
+			<input type="hidden" value="<%=request.getParameter("enrol")%>" name="enrol" id="enrol" />
+			<input type="hidden" value="<%=request.getParameter("id")%>" name="id" id="id" />
 		</form>
-		
-		<br><br><br>
-		
-		<ul>
-		<% ArrayList<Grade> grades = ApplicationDAO.getGrades(Integer.valueOf(request.getParameter("enrol")));
-			for(Grade grade: grades ){
-		%>
-			<li>Name: <%=grade.getAssignmentName() %> <br> Grade: <%=grade.getGradePercentage()%>
-			 <a href="/CapstoneMVP/user/AssignmentEdit?action=edit&id=<%= grade.getId() %>&enrol=<%= request.getParameter("enrol") %>">Edit</a> 
-			 <a href="/CapstoneMVP/user/AssignmentView?action=delete&id=<%= grade.getId() %>&enrol=<%= request.getParameter("enrol") %>">Delete</a></li>
-		
-		<% } %>
-	</ul>
+
 </body>
 </html>
