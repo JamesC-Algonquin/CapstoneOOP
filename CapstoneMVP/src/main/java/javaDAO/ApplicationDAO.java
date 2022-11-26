@@ -101,6 +101,44 @@ public class ApplicationDAO {
 		return student;
 	}
 	
+	public static Grade getGrade(int id) {
+		DBConnection dbConn = DBConnection.getDBConnection();
+		Connection conn = null;
+		String sql = "SELECT * FROM GRADE WHERE ID = ?;";
+		ResultSet result = null;
+		Grade grade = null;
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
+			result.next();
+			grade = new Grade(result.getInt("id"), result.getString("AssignmentName"), result.getDouble("GradePercentage"));
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		} 
+		return grade;
+	}
+	
+	public static void updateGrade(int id, String name, double percent) {
+		DBConnection dbConn = DBConnection.getDBConnection();
+		Connection conn = null;
+		String sql = "UPDATE GRADE SET ASSIGNMENTNAME = ?, GRADEPERCENTAGE = ? WHERE ID = ?;";
+		
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, name);
+			stmt.setDouble(2, percent);
+			stmt.setInt(3, id);
+			stmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		} 
+	}
+	
 	public static ArrayList<Course> getCourses(int id){
 		ArrayList<Course> courses = new ArrayList<>();
 		DBConnection dbConn = DBConnection.getDBConnection();
@@ -231,5 +269,24 @@ public class ApplicationDAO {
 		}
 	}
 
-
+	public static void deleteGrade(int id) {
+		
+		DBConnection dbConn = DBConnection.getDBConnection();
+		Connection conn = null;
+		
+		String sql = "DELETE FROM GRADE WHERE ID=?;";
+		
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

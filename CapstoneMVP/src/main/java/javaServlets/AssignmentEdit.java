@@ -11,38 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import javaDAO.ApplicationDAO;
 
+@WebServlet("/user/AssignmentEdit")
+public class AssignmentEdit extends HttpServlet {
 
-@WebServlet("/user/AssignmentView")
-public class AssignmentView extends HttpServlet {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = req.getParameter("action");
-		if (!(action == null) && action.equals("delete")) {
-			int id = Integer.valueOf(req.getParameter("id"));
-			ApplicationDAO.deleteGrade(id);
-		}
-		int enrol = Integer.valueOf(req.getParameter("enrol"));
-		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/AssignmentView.jsp?enrol=" + enrol);
+		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/AssignmentEdit.jsp");
 		dispatch.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("name");
-		double percent = Double.valueOf(req.getParameter("percent"));
+		double percent =Double.valueOf(req.getParameter("percent"));
+		int id = Integer.valueOf(req.getParameter("id"));
 		int enrol = Integer.valueOf(req.getParameter("enrol"));
 		
-		ApplicationDAO.insertGrade(enrol, name, percent);
+		ApplicationDAO.updateGrade(id, name, percent);
 		
 		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/AssignmentView.jsp?enrol=" + enrol);
 		dispatch.forward(req, resp);
-				
 	}
+	
 
 }
