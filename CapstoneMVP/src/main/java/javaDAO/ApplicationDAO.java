@@ -170,7 +170,32 @@ public class ApplicationDAO {
 		return courses;
 	}
 	
-	public static ArrayList<Enrolment> getEnrolment(int id){
+	public static ArrayList<Course> getNewCourses(int id){
+		ArrayList<Course> courses = new ArrayList<>();
+		DBConnection dbConn = DBConnection.getDBConnection();
+		Connection conn = null;
+		String sql = "SELECT COURSE.ID as id, COURSE.COURSENAME AS name FROM COURSE WHERE "
+				+ "COURSE.ID NOT IN(SELECT COURSE_ID FROM ENROLMENT WHERE STUDENT_ID = ?);";
+		ResultSet result = null;
+		
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
+			while(result.next()) {
+				Course course = new Course(result.getInt("id"), result.getString("name"));
+				courses.add(course);
+			}			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return courses;
+	}
+	
+ 	public static ArrayList<Enrolment> getEnrolment(int id){
 		ArrayList<Enrolment> enrolments = new ArrayList<>();
 		DBConnection dbConn = DBConnection.getDBConnection();
 		Connection conn = null;
@@ -188,6 +213,31 @@ public class ApplicationDAO {
 				Enrolment enrol = new Enrolment(result.getInt("id"), student);
 				enrolments.add(enrol);
 				
+			}			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return enrolments;
+	}
+	
+	public static ArrayList<Enrolment> getStudentEnrolment(int id){
+		ArrayList<Enrolment> enrolments = new ArrayList<>();
+		DBConnection dbConn = DBConnection.getDBConnection();
+		Connection conn = null;
+		String sql = "SELECT COURSE.COURSENAME AS name, COURSE_ID as course_id, ENROLMENT.ID AS id FROM ENROLMENT JOIN STUDENT ON ENROLMENT.STUDENT_ID = STUDENT.ID JOIN COURSE ON ENROLMENT.COURSE_ID = COURSE.ID WHERE STUDENT_ID = ?;";
+		ResultSet result = null;
+		
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			result = stmt.executeQuery();
+			while(result.next()) {
+				Course course = new Course(result.getInt("course_id"), result.getString("name"));
+				Enrolment enrol = new Enrolment(result.getInt("id"), course);
+				enrolments.add(enrol);
 			}			
 		}
 		catch(Exception e) {
@@ -220,7 +270,7 @@ public class ApplicationDAO {
 		
 		return grades;
 	}
-	
+		
 	public static void insertGrade(int id, String name, double percent) {
 		String sql = "INSERT INTO GRADE (ASSIGNMENTNAME, GRADEPERCENTAGE, ENROLMENT_ID) VALUES (?, ?, ?);";
 		Connection conn = null;
@@ -296,5 +346,39 @@ public class ApplicationDAO {
 		
 	}
 	
+	public static void insertCourse(String name, int id) {
+		String sql = "INSERT INTO COURSE (COURSENAME, PROFESSOR_ID) VALUES (?, ?);";
+		Connection conn = null;
+		DBConnection dbConn = DBConnection.getDBConnection();
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, name);
+			stmt.setInt(2, id);
+			stmt.executeUpdate();
+			System.out.println("saved to db/");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
+	public static void enrol(int sid, int cid) {
+		String sql = "INSERT INTO ENROLMENT (STUDENT_ID, COURSE_ID) VALUES (?, ?);";
+		Connection conn = null;
+		DBConnection dbConn = DBConnection.getDBConnection();
+		try {
+			conn = dbConn.getConnectionToDatabase();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, sid);
+			stmt.setInt(2, cid);
+			stmt.executeUpdate();
+			System.out.println("saved to db/");
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="/CapstoneMVP/CSS/style.css" />
     </head>
     <body>
-        <div class="container">
+        <div class="register">
             <h1>Register with Java Grading System</h1>
             <form action="/CapstoneMVP/Register" method="post">
             	<input type="text" placeholder="Name" class="field" id="name" name="name" required/>
