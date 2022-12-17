@@ -11,31 +11,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import javaDAO.ApplicationDAO;
-import javaObjects.Professor;
+import javaObjects.Student;
 
-@WebServlet("/user/CourseView")
-public class CourseView extends HttpServlet {
-
+@WebServlet("/user/EnrolView")
+public class EnrolView extends HttpServlet {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/CourseView.jsp");
+		if(req.getParameter("course") != null) {
+			int courseId = Integer.valueOf(req.getParameter("course"));
+			
+			HttpSession session = req.getSession();
+			Student student = (Student) session.getAttribute("user");
+			int studentId = student.getId();
+			
+			ApplicationDAO.enrol(studentId, courseId);
+		}
+		RequestDispatcher dispatch = req.getRequestDispatcher("/HTML/EnrolView.jsp");
 		dispatch.forward(req, resp);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String courseName = req.getParameter("name");
-		HttpSession session = req.getSession();
-		Professor prof = (Professor) session.getAttribute("user");
-		int id = prof.getId();
-		ApplicationDAO.insertCourse(courseName, id);
-		doGet(req, resp);
-		
+		doGet(req,resp);
 	}
 
 }

@@ -19,6 +19,15 @@
 	</ul>
 	<br>
 	<br>
+		<form action="/CapstoneMVP/user/CourseView" method="POST">
+			<label for="name">Course Name</label><br>
+			<input type="text" id="name" name="name" required/><br>
+			<input type="submit" value="Submit" />		
+		</form>
+		
+		<br>
+	
+	<br>
 	<ul>
 		<% 	Professor prof = (Professor) session.getAttribute("user");
 			
